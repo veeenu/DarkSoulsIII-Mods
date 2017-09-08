@@ -10,11 +10,12 @@ You can download executable versions of the tools under the **Releases** tab.
 
 ### PracTeleport
 
-[Download](https://github.com/veeenu/DarkSoulsIII-Mods/releases/download/0.0.1-alpha/PracTeleport.zip)
+[Download](https://github.com/veeenu/DarkSoulsIII-Mods/releases/download/0.0.3-alpha/PracTeleport.zip)
 
 A CheatEngine trainer that allows you to save your current position (by pressing `F4`) and restore it later (by pressing `F5`). 
 
-You can also toggle an *unlimited iframes* script by pressing `F6`.
+You can also toggle an *unlimited iframes* script by pressing `F6`, and *deathcam* by pressing `F7`.
+Soon, in one of the next releases, hotkeys will be made configurable.
 
 This tool is intended to practice position-based skips, such as:
 
