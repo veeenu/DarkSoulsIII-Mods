@@ -10,12 +10,35 @@ You can download executable versions of the tools under the **Releases** tab.
 
 ### PracTeleport
 
-[Download](https://github.com/veeenu/DarkSoulsIII-Mods/releases/download/0.0.3-alpha/PracTeleport.zip)
+[Download](https://github.com/veeenu/DarkSoulsIII-Mods/releases/download/0.0.4-alpha/PracTeleport.zip)
 
-A CheatEngine trainer that allows you to save your current position (by pressing `F4`) and restore it later (by pressing `F5`). 
+A general-purpose configurable practice tool. It currently has the following features:
 
-You can also toggle an *unlimited iframes* script by pressing `F6`, and *deathcam* by pressing `F7`.
-Soon, in one of the next releases, hotkeys will be made configurable.
+- Save/load position (`F3` - `F4`)
+
+- No damage (`Y`)
+
+- No death (`U`)
+
+- Deathcam (`I`)
+
+- Draw events (`O`)
+
+- Infinite stamina (`H`)
+
+- Infinite FP (`J`)
+
+- Infinite consumables (`K`)
+
+- Disable events (`L`)
+
+- Disable all AI (`N`)
+
+- One-shot damage (`M`)
+
+- Speed multiplier (1x, 1.5x, 2x, 4x) (`,`)
+
+The tool has hotkeys which can be configured by editing the `practeleport.yml` file which is created when the tool is started.
 
 This tool is intended to practice position-based skips, such as:
 
@@ -29,4 +52,4 @@ Just open Dark Souls III, run the executable and you're good to go.
 
 ## Credits
 
-- [Reverse Souls](https://github.com/igromanru/Dark-Souls-III-Cheat-Engine-Guide) for the CE table upon which some of the trainers are based
+- [Reverse Souls](https://github.com/igromanru/Dark-Souls-III-Cheat-Engine-Guide) for the CE table upon which some of the trainers and tools are based

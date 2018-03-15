@@ -140,7 +140,7 @@ namespace PracTeleport {
       UIntPtr bRead = UIntPtr.Zero;
 
       WriteProcessMemory(hProcess, address, buf, 1, out bRead);
-      Debug.WriteLine(Marshal.GetLastWin32Error() + " " + bRead);
+      //Debug.WriteLine(Marshal.GetLastWin32Error() + " " + bRead);
     }
 
     public void writeFloat(IntPtr address, float f) {
@@ -172,13 +172,13 @@ namespace PracTeleport {
       IntPtr bRead = IntPtr.Zero;
 
       ReadProcessMemory(hProcess, start, buf, size, out bRead);
-      Debug.WriteLine(Marshal.GetLastWin32Error() + " " + bRead.ToString("X") + " " + size.ToString("X"));
+      //Debug.WriteLine(Marshal.GetLastWin32Error() + " " + bRead.ToString("X") + " " + size.ToString("X"));
 
       StringBuilder sb = new StringBuilder();
       for(int xx = 0; xx < pattern.Count; xx++) {
         sb.Append(buf[0x841875 + xx].ToString("X") + " ");
       }
-      Debug.WriteLine(sb.ToString());
+      //Debug.WriteLine(sb.ToString());
 
       // BMH
 

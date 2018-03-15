@@ -6,50 +6,63 @@
         xmlns:local="clr-namespace:PracTeleport"
         mc:Ignorable="d"
         
-        Title="DS3Teleport" Height="200" Width="320">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="30px"/>
-      <RowDefinition Height="30px"/>
-      <RowDefinition Height="20px"/>
-      <RowDefinition Height="1*"/>
-      <RowDefinition Height="24px"/>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="1*"/>
-    </Grid.ColumnDefinitions>
+        Title="DS3 Practice Tool" Height="262.36" Width="436.273">
+  <StackPanel>
+    <GroupBox Header="Flags">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="1*"/>
+          <RowDefinition Height="1*"/>
+          <RowDefinition Height="1*"/>
+          <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="1*"/>
+          <ColumnDefinition Width="1*"/>
+          <ColumnDefinition Width="1*"/>
+          <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-    <Grid Grid.Row="0">
+        <CheckBox x:Name="cbNoDamage" Grid.Column="0" Grid.Row="0" Margin="4,2,2,2">No damage</CheckBox>
+        <CheckBox x:Name="cbNoDeath" Grid.Column="1" Grid.Row="0" Margin="4,2,2,2">No death</CheckBox>
+        <CheckBox x:Name="cbDeathcam" Grid.Column="2" Grid.Row="0" Margin="2,2,4,2">Deathcam</CheckBox>
+        <CheckBox x:Name="cbEventDraw" Grid.Column="3" Grid.Row="0" Margin="2,2,4,2">Draw events</CheckBox>
+        
+        <CheckBox x:Name="cbNoStamina" Grid.Column="0" Grid.Row="1" Margin="4,2,2,2">Inf stamina</CheckBox>
+        <CheckBox x:Name="cbNoFp" Grid.Column="1" Grid.Row="1" Margin="4,2,2,2">Inf FP</CheckBox>
+        <CheckBox x:Name="cbNoConsume" Grid.Column="2" Grid.Row="1" Margin="2,2,2,2">Inf items</CheckBox>
+        <CheckBox x:Name="cbEventDisable" Grid.Column="3" Grid.Row="1" Margin="2,2,4,2">Disable events</CheckBox>
+
+        <CheckBox x:Name="cbResidentSleeper" Grid.Column="0" Grid.Row="2" Margin="4,2,2,2">Disable AI</CheckBox>
+        <CheckBox x:Name="cbOneShot" Grid.Column="1" Grid.Row="2" Margin="4,2,2,2">One-Shot</CheckBox>
+        <ComboBox x:Name="cbSpeed" Grid.Column="2" Grid.Row="2" Margin="4,2,2,2">
+          <ComboBoxItem IsSelected="True">1x</ComboBoxItem>
+          <ComboBoxItem>1.5x</ComboBoxItem>
+          <ComboBoxItem>2x</ComboBoxItem>
+          <ComboBoxItem>4x</ComboBoxItem>
+        </ComboBox>
+
+      </Grid>
+    </GroupBox>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="1*"/>
+      </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
-      </Grid.ColumnDefinitions>
-      <Button x:Name="btnSave" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="4,4,2,2">Save position (F4)</Button>
-      <Button x:Name="btnLoad" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2,4,4,2">Load position (F5)</Button>
-    </Grid>
-
-    <Grid Grid.Row="1">
-      <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
         <ColumnDefinition Width="1*"/>
       </Grid.ColumnDefinitions>
-      <TextBox x:Name="tbX" Grid.Column="0" Margin="4,2,2,2" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-      <TextBox x:Name="tbY" Grid.Column="1" Margin="2" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-      <TextBox x:Name="tbZ" Grid.Column="2" Margin="2,2,4,2" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+      <Button x:Name="btnSave" Grid.Column="0" Margin="4,2,2,2">Save pos</Button>
+      <Button x:Name="btnLoad" Grid.Column="1" Margin="2,2,2,2">Load pos</Button>
+      <TextBox x:Name="tbX" Grid.Column="2" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+      <TextBox x:Name="tbY" Grid.Column="3" Margin="2,2,2,2" IsEnabled="False"></TextBox>
+      <TextBox x:Name="tbZ" Grid.Column="4" Margin="2,2,4,2" IsEnabled="False"></TextBox>
     </Grid>
-
-    <Grid Grid.Row="2">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1*"/>
-        <ColumnDefinition Width="1*"/>
-      </Grid.ColumnDefinitions>
-      <CheckBox x:Name="cbIframes" Grid.Column="0" Margin="4,2,2,2">Infinite iFrames (F6)</CheckBox>
-      <CheckBox x:Name="cbDeathcam" Grid.Column="1" Margin="2,2,4,2">Deathcam (F7)</CheckBox>
-    </Grid>
-
-    <TextBox x:Name="logBox" Grid.Row="3" Margin="4,2,4,0" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"></TextBox>
+    <TextBox x:Name="logBox" Height="120" Margin="4,2,4,0" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"></TextBox>
     <TextBlock Grid.Row="4" Margin="4,2,4,4"><Hyperlink NavigateUri="https://twitch.tv/johndisandonato">https://twitch.tv/johndisandonato</Hyperlink></TextBlock>
+  </StackPanel>
 
-  </Grid>
 </Window>

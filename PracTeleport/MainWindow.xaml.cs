@@ -26,11 +26,14 @@ namespace PracTeleport {
 
     private bool isDone = false;
     private HwndSource source;
+    private IntPtr interopHandle;
 
     private const int WM_HOTKEY = 0x0312;
     private const int HOTKEY_ID = 9000;
 
     private const int VK_F4 = 0x73, VK_F5 = 0x74, VK_F6 = 0x75, VK_F7 = 0x76;
+
+    private HotkeyManager hkMgr;
 
     [DllImport("user32.dll")]
     private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
@@ -51,10 +54,16 @@ namespace PracTeleport {
       source = HwndSource.FromHwnd(handle);
       source.AddHook(HwndHook);
 
-      RegisterHotKey(handle, HOTKEY_ID, 0, VK_F4);
+      this.interopHandle = handle;
+      hkMgr = new HotkeyManager();
+      hkMgr.ForEachRegisteredKey((k) => {
+        Debug.WriteLine("Registering " + k.ToString("X"));
+        RegisterHotKey(handle, HOTKEY_ID, 0, (uint)k);
+      });
+      /*RegisterHotKey(handle, HOTKEY_ID, 0, VK_F4);
       RegisterHotKey(handle, HOTKEY_ID, 0, VK_F5);
       RegisterHotKey(handle, HOTKEY_ID, 0, VK_F6);
-      RegisterHotKey(handle, HOTKEY_ID, 0, VK_F7);
+      RegisterHotKey(handle, HOTKEY_ID, 0, VK_F7);*/
     }
 
     private void MainWindow_Closed(object sender, CancelEventArgs e) {
@@ -71,13 +80,27 @@ namespace PracTeleport {
     }
 
     private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
-
       switch (msg) {
         case WM_HOTKEY:
           switch (wParam.ToInt32()) {
             case HOTKEY_ID:
               int vkey = (((int)lParam >> 16) & 0xFFFF);
-              if (vkey == VK_F4) {
+              Debug.WriteLine("Processing " + vkey.ToString("X"));
+              hkMgr.ProcessHotkey(vkey, (o) => {
+                this.Dispatcher.BeginInvoke(new Action(() => {
+                  if(o is Button) {
+                    ((Button)o).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                  } else if(o is CheckBox) {
+                    CheckBox cb = (CheckBox)o;
+                    cb.IsChecked = !cb.IsChecked;
+                    cb.RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
+                  } else if(o is ComboBox) {
+                    ComboBox cmb = (ComboBox)o;
+                    cmb.SelectedIndex = (cmb.SelectedIndex + 1) % cmb.Items.Count;
+                  }
+                }));
+              });
+              /*if (vkey == VK_F4) {
                 //handle global hot key here...
                 this.Dispatcher.BeginInvoke(new Action(() => {
                   btnSave.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -88,15 +111,15 @@ namespace PracTeleport {
                 }));
               } else if(vkey == VK_F6) {
                 this.Dispatcher.BeginInvoke(new Action(() => {
-                  cbIframes.IsChecked = !cbIframes.IsChecked;
-                  cbIframes.RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
+                  cbNoDeath.IsChecked = !cbNoDeath.IsChecked;
+                  cbNoDeath.RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
                 }));
               } else if (vkey == VK_F7) {
                 this.Dispatcher.BeginInvoke(new Action(() => {
                   cbDeathcam.IsChecked = !cbDeathcam.IsChecked;
                   cbDeathcam.RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
                 }));
-              }
+              }*/
               handled = true;
               break;
           }
@@ -125,13 +148,19 @@ namespace PracTeleport {
 
       List<uint?> aobXA = new List<uint?> { 0x48, 0x8B, 0x83, null, null, null, null, 0x48, 0x8B, 0x10, 0x48, 0x85, 0xD2 };
       List<uint?> aobBaseB = new List<uint?> { 0x48, 0x8B, 0x1D, null, null, null, 0x04, 0x48, 0x8B, 0xF9, 0x48, 0x85, 0xDB, null, null, 0x8B, 0x11, 0x85, 0xD2, null, null, 0x8D };
+      List<uint?> aobBaseF = new List<uint?> { 0x48, 0x8B, 0x05, null, null, null, null, 0x41, 0x0F, 0xB6 };
+      List<uint?> aobDebug = new List<uint?> { 0x4C, 0x8D, 0x05, null, null, null, null, 0x48, 0x8D, 0x15, null, null, null, null, 0x48, 0x8B, 0xCB, 0xE8, null, null, null, null, 0x48, 0x83, 0x3D, null, null, null, null, 0x00 };
+      List<uint?> aobSpeed = new List<uint?> { 0x88, 0x00, 0x00, 0x00, null, null, null, null, 0xC7, 0x86, 0xA0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xBF, 0x33 };
 
       IntPtr? offsXA = mm.AobScan(aobXA, mm.baseAddr, 0x5ffffff);
       IntPtr? offsBaseB = mm.AobScan(aobBaseB, mm.baseAddr, 0x5ffffff);
+      IntPtr? offsBaseF = mm.AobScan(aobBaseF, mm.baseAddr, 0x5ffffff);
+      IntPtr? offsDebug = mm.AobScan(aobDebug, mm.baseAddr, 0x5ffffff);
+      IntPtr? offsSpeed = mm.AobScan(aobSpeed, mm.baseAddr, 0x5ffffff);
       Int32 XA;
-      Int64 BaseB;
+      Int64 BaseB, BaseF, AddrDebug, AddrSpeed;
 
-      if (offsXA.HasValue && offsBaseB.HasValue) {
+      if (offsXA.HasValue && offsBaseB.HasValue && offsBaseF.HasValue) {
         this.Dispatcher.BeginInvoke(new Action(() => {
           logBox.Text += "Success.\n";
           logBox.ScrollToEnd();
@@ -142,37 +171,31 @@ namespace PracTeleport {
         BaseB = mm.baseAddr.ToInt64() + offsBaseB.Value.ToInt64();
         BaseB = BaseB + mm.readInt32(new IntPtr(BaseB + 3)) + 7;
 
-        //List<Int64> addrHyperArmor = new List<Int64> { BaseB, 0x80, XA, 0x40, 0x10 }; // bit 0
-        //List<Int64> addrNoDamage   = new List<Int64> { BaseB, 0x80, XA, 0x18, 0x1C0 }; // bit 1
-        List<Int64> pcInvuln = new List<Int64> { BaseB, 0x80, 0x1a09 }; // bit 7
+        BaseF = mm.baseAddr.ToInt64() + offsBaseF.Value.ToInt64();
+        BaseF = BaseF + mm.readInt32(new IntPtr(BaseF + 3)) + 7;
+
+        AddrDebug = mm.baseAddr.ToInt64() + offsDebug.Value.ToInt64();
+        AddrDebug = AddrDebug + mm.readInt32(new IntPtr(AddrDebug + 3)) + 7;
+        Debug.WriteLine(AddrDebug.ToString("X"));
+
+        AddrSpeed = mm.baseAddr.ToInt64() + offsSpeed.Value.ToInt64() + 4;
+
+        List<Int64> pcNoDamage = new List<Int64> { BaseB, 0x80, 0x1a09 }; // bit 7
+        // bit 2: no death; bit 4: no stamina cons; bit 5: no fp cons
+        List<Int64> pcNoDeath  = new List<Int64> { BaseB, 0x80, XA, 0x18, 0x1C0 };
+        List<Int64> pcNoConsume = new List<Int64> { BaseB, 0x80, 0x1EEA }; // bit 3
         List<Int64> pcDeathcam = new List<Int64> { BaseB, 0x90 }; // byte
+        List<Int64> pcEventDraw  = new List<Int64> { BaseF, 0xA8 }; // byte
+        List<Int64> pcEventDisable  = new List<Int64> { BaseF, 0xD4 }; // byte
+        List<Int64> pcResidentSleeper = new List<Int64> { AddrDebug + 9 + 3 }; // byte
+        List<Int64> pcOneShot = new List<Int64> { AddrDebug + 0 }; // byte
         List<Int64> pcX = new List<Int64> { BaseB, 0x40, 0x28, 0x80 }; // float
         List<Int64> pcY = new List<Int64> { BaseB, 0x40, 0x28, 0x88 }; // float
         List<Int64> pcZ = new List<Int64> { BaseB, 0x40, 0x28, 0x84 }; // float
 
-        var isIframesChecked = cbIframes.Dispatcher.Invoke(() => cbIframes.IsChecked);
-        var isDeathcamChecked = cbDeathcam.Dispatcher.Invoke(() => cbDeathcam.IsChecked);
-
-        //IntPtr? addrInvuln, addrDeathcam, addrX, addrY, addrZ;
-
-        bool? isInvuln = null, isDeathcam = null;
         float? posX = null, posY = null, posZ = null;
 
         this.Dispatcher.BeginInvoke(new Action(() => {
-
-          RoutedEventHandler callbackIframes = (object sender, RoutedEventArgs e) => {
-            isInvuln = cbIframes.IsChecked;
-          };
-
-          cbIframes.Click += callbackIframes;
-          //cbIframes.Unchecked += callbackIframes;
-
-          RoutedEventHandler callbackDeathcam = (object sender, RoutedEventArgs e) => {
-            isDeathcam = cbDeathcam.IsChecked;
-          };
-
-          cbDeathcam.Click += callbackDeathcam;
-          //cbDeathcam.Unchecked += callbackDeathcam;
 
           RoutedEventHandler clkSave = (object sender, RoutedEventArgs e) => {
             IntPtr? px, py, pz;
@@ -221,65 +244,120 @@ namespace PracTeleport {
 
         }));
 
+        CheckboxListener cblNoDamage = new CheckboxListener(cbNoDamage, pcNoDamage, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? (b | 0b10000000) : (b & 0b01111111));
+          mm.writeByte(addr, b);
+        });
+
+        // bit 2: no death; bit 4: no stamina cons; bit 5: no fp cons
+        CheckboxListener cblNoDeath = new CheckboxListener(cbNoDeath, pcNoDeath, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? (b | 0b00000100) : (b & 0b11111011));
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblNoStamina = new CheckboxListener(cbNoStamina, pcNoDeath, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? (b | 0b00010000) : (b & 0b11101111));
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblNoFp = new CheckboxListener(cbNoFp, pcNoDeath, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? (b | 0b00100000) : (b & 0b11011111));
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblNoConsume = new CheckboxListener(cbNoConsume, pcNoConsume, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? (b | 0b00001000) : (b & 0b11110111));
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblDeathcam = new CheckboxListener(cbDeathcam, pcDeathcam, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? 1 : 0);
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblEventDraw = new CheckboxListener(cbEventDraw, pcEventDraw, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? 1 : 0);
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblEventDisable = new CheckboxListener(cbEventDisable, pcEventDisable, this, mm, (state, addr) => {
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? 1 : 0);
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblResidentSleeper = new CheckboxListener(cbResidentSleeper, pcResidentSleeper, this, mm, (state, addr) => {
+          //Debug.WriteLine(addr.ToString("X"));
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? 1 : 0);
+          mm.writeByte(addr, b);
+        });
+
+        CheckboxListener cblOneShot = new CheckboxListener(cbOneShot, pcOneShot, this, mm, (state, addr) => {
+          //Debug.WriteLine(addr.ToString("X"));
+          byte b = mm.readByte(addr);
+          b = (byte)(state ? 1 : 0);
+          mm.writeByte(addr, b);
+        });
+
+        hkMgr.SetObjectLabels(new Dictionary<string, object>() {
+          { "save_position", btnSave },
+          { "load_position", btnLoad },
+          { "no_damage", cbNoDamage },
+          { "no_death", cbNoDeath },
+          { "no_consume", cbNoConsume },
+          { "infinite_fp", cbNoFp},
+          { "infinite_stamina", cbNoStamina },
+          { "deathcam", cbDeathcam },
+          { "event_draw", cbEventDraw },
+          { "event_disable", cbEventDisable },
+          { "ai_disable", cbResidentSleeper },
+          { "one_shot", cbOneShot },
+          { "speed", cbSpeed },
+        });
+
+        cbSpeed.SelectionChanged += (sender, e) => {
+          float[] speeds = new float[] { 1.0f, 1.5f, 2.0f, 4.0f };
+          int idx = (sender as ComboBox).SelectedIndex;
+          float val = speeds[idx];
+          mm.writeFloat((IntPtr)AddrSpeed, val);
+        };
+
+        int i = 0;
         while (!isDone) {
 
-          if (isInvuln.HasValue) {
-            IntPtr? addrInvuln = mm.evalPointerChain(pcInvuln);
-            byte b;
-            if (addrInvuln.HasValue) {
-              b = mm.readByte(addrInvuln.Value);
-              byte b1 = (byte)(isInvuln.Value ? (b | 0b10000000) : (b & 0b01111111));
-              mm.writeByte(addrInvuln.Value, b1);
+          Thread.Sleep(TimeSpan.FromMilliseconds(250));
+          this.Dispatcher.BeginInvoke(new Action(() => {
+            cblNoDamage.poll();
+            cblNoDeath.poll();
+            cblNoStamina.poll();
+            cblNoFp.poll();
+            cblNoConsume.poll();
+            cblDeathcam.poll();
+            cblEventDraw.poll();
+            cblEventDisable.poll();
+            cblResidentSleeper.poll();
+            cblOneShot.poll();
+          }));
 
-              this.Dispatcher.Invoke(() => {
-                logBox.Text += "Iframes " + (isInvuln.Value ? "activated" : "deactivated") + "\n";
-                logBox.ScrollToEnd();
-                cbIframes.IsChecked = isInvuln.Value;
-              });
-            }
-            isInvuln = null;
-
-          }
-          else {
-
-            IntPtr? addrInvuln = mm.evalPointerChain(pcInvuln);
-            if (addrInvuln.HasValue) {
-
-              byte hasIframes = mm.readByte(addrInvuln.Value);
-              int b = (hasIframes >> 7) & 0x01;
-              this.Dispatcher.Invoke(() => {
-                cbIframes.IsChecked = (b == 1);
-              });
-            }
-          }
-
-          if (isDeathcam.HasValue) {
-            IntPtr? addrDeathcam = mm.evalPointerChain(pcDeathcam);
-            if (addrDeathcam.HasValue) {
-              byte b = (byte)(isDeathcam.Value ? 1 : 0);
-              mm.writeByte(addrDeathcam.Value, b);
-            }
-
-            this.Dispatcher.Invoke(() => {
-              logBox.Text += "Deathcam " + (isDeathcam.Value ? "activated" : "deactivated") + "\n";
-              logBox.ScrollToEnd();
-              cbDeathcam.IsChecked = isDeathcam.Value;
-            });
-            isDeathcam = null;
-          }
-          else {
-            IntPtr? addrDeathcam = mm.evalPointerChain(pcDeathcam);
-            if (addrDeathcam.HasValue) {
-
-              byte hasDeathcam = mm.readByte(addrDeathcam.Value);
-              this.Dispatcher.Invoke(() => {
-                cbDeathcam.IsChecked = (hasDeathcam != 0);
-              });
-            }
-          }
+          cblNoDamage.evaluate();
+          cblNoDeath.evaluate();
+          cblNoStamina.evaluate();
+          cblNoFp.evaluate();
+          cblNoConsume.evaluate();
+          cblDeathcam.evaluate();
+          cblEventDraw.evaluate();
+          cblEventDisable.evaluate();
+          cblResidentSleeper.evaluate();
+          cblOneShot.evaluate();
         }
-
-        Thread.Sleep(TimeSpan.FromMilliseconds(250));
 
       }
       else {
@@ -289,7 +367,7 @@ namespace PracTeleport {
         }));
       }
 
-      Debug.WriteLine(mm.baseAddr.ToString("X"));
+//      Debug.WriteLine(mm.baseAddr.ToString("X"));
 
       this.Dispatcher.BeginInvoke(new Action(() => {
         logBox.Text += "Bye";
