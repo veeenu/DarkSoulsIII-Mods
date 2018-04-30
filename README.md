@@ -8,45 +8,27 @@ You can download executable versions of the tools under the **Releases** tab.
 
 ## List of tools
 
-### PracTeleport
-
-[Download](https://github.com/veeenu/DarkSoulsIII-Mods/releases/download/0.0.4-alpha/PracTeleport.zip)
+### PracticeTool
 
 A general-purpose configurable practice tool. It currently has the following features:
 
-- Save/load position (`F3` - `F4`)
-
-- No damage (`Y`)
-
-- No death (`U`)
-
-- Deathcam (`I`)
-
-- Draw events (`O`)
-
-- Infinite stamina (`H`)
-
-- Infinite FP (`J`)
-
-- Infinite consumables (`K`)
-
-- Disable events (`L`)
-
-- Disable all AI (`N`)
-
-- One-shot damage (`M`)
-
+- Save/load position
+- No damage
+- No death
+- Deathcam
+- Draw events
+- Disable events
+- Disable all AI
+- Infinite stamina, FP, consumables (this one is currently broken)
+- One-shot damage
+- Show/hide map, character and objects
+- Noclip + move up/down
 - Speed multiplier (1x, 1.5x, 2x, 4x) (`,`)
+- Locking/editing values for HP, FP, SP, and position
 
-The tool has hotkeys which can be configured by editing the `practeleport.yml` file which is created when the tool is started.
+The `1.08` and `1.12` patches are currently supported, and the `1.04` support is under way.
 
-This tool is intended to practice position-based skips, such as:
-
-- *Farron Keep Skip*: you can save your position near the spot and teleport back there immediately if you die
-- *Irithyll Skip*: save your position before jumping, teleport back when you fall on the other side
-- *Scream Skip*: save your position on firm ground, quickly teleport back if you risk falling off and dying
-- *Wolf Skip*: return back to the original jump spot if you misalign the jump
-- *Angel Skip*: avoid having to run all the way back if you fail the jump
+The tool has hotkeys which can be configured in the `Settings` panel.
 
 Just open Dark Souls III, run the executable and you're good to go.
 
