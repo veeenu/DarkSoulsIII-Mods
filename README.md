@@ -10,6 +10,8 @@ You can download executable versions of the tools under the **Releases** tab.
 
 ### PracticeTool
 
+[Download](https://github.com/veeenu/DarkSoulsIII-Mods/releases/download/0.0.5-alpha/PracticeTool.zip)
+
 A general-purpose configurable practice tool. It currently has the following features:
 
 - Save/load position
