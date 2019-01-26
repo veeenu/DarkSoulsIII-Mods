@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"No description"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>DarkSoulsIII.exe+474C2E8</Address>
+      <Offsets>
+        <Offset>250</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="1427DDF98"/>
+      <VariableType>String</VariableType>
+      <Length>7</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>DarkSoulsIII.exe+27DDF98</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"No description"</Description>
+      <LastState RealAddress="1427DF0C0"/>
+      <VariableType>String</VariableType>
+      <Length>7</Length>
+      <Unicode>1</Unicode>
+      <CodePage>0</CodePage>
+      <ZeroTerminate>1</ZeroTerminate>
+      <Address>DarkSoulsIII.exe+27DF0C0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"1.08"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"Top of the function"</Description>
+          <LastState Value="608995656" RealAddress="140754E90"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>140754E90</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"Insta Quitout"</Description>
+          <LastState Value="0" RealAddress="7FF41FEAD410"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>DarkSoulsIII.exe+47103D8</Address>
+          <Offsets>
+            <Offset>250</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"XA"</Description>
+          <LastState Value="48 8B 83 80 1F 00 00 48 8B 10 48 85 D2" RealAddress="14083BA91"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>13</ByteLength>
+          <Address>DarkSoulsIII.exe+83BA91</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"No description"</Description>
+              <LastState Value="00001F80" RealAddress="14083BA94"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+83BA91+3</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"BaseB"</Description>
+          <LastState Value="48 8B 1D 77 C1 26 04 48 8B F9 48 85 DB 74 76 8B 11 85 D2 78 70 8D" RealAddress="1404C0DDA"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>22</ByteLength>
+          <Address>DarkSoulsIII.exe+4C0DDA</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>13</ID>
+              <Description>"+3"</Description>
+              <LastState Value="0426C177" RealAddress="1404C0DDD"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+4C0DDA+3</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>14</ID>
+              <Description>"Full"</Description>
+              <LastState Value="4E9B3770" RealAddress="14472CF58"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+4C0DDA+0426c177+7</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>29</ID>
+              <Description>"Ptrs"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>30</ID>
+                  <Description>"No Damage"</Description>
+                  <LastState Value="1" RealAddress="7FF44FC95819"/>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>7</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>DarkSoulsIII.exe+4C0DDA+0426c177+7</Address>
+                  <Offsets>
+                    <Offset>1a09</Offset>
+                    <Offset>80</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>32</ID>
+                  <Description>"No Death"</Description>
+                  <LastState Value="0" RealAddress="7FF44FC971D0"/>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>2</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>DarkSoulsIII.exe+4C0DDA+0426c177+7</Address>
+                  <Offsets>
+                    <Offset>1c0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1f80</Offset>
+                    <Offset>80</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>34</ID>
+                  <Description>"No Stamina"</Description>
+                  <LastState Value="0" RealAddress="7FF44FC971D0"/>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>4</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>DarkSoulsIII.exe+4C0DDA+0426c177+7</Address>
+                  <Offsets>
+                    <Offset>1c0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1f80</Offset>
+                    <Offset>80</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>33</ID>
+                  <Description>"No Fp"</Description>
+                  <LastState Value="0" RealAddress="7FF44FC971D0"/>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>5</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>DarkSoulsIII.exe+4C0DDA+0426c177+7</Address>
+                  <Offsets>
+                    <Offset>1c0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1f80</Offset>
+                    <Offset>80</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"BaseD"</Description>
+          <LastState Value="48 8B 0D D1 15 24 04 48 85 C9 74 26 44" RealAddress="1404C6580"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>13</ByteLength>
+          <Address>DarkSoulsIII.exe+4C6580</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>15</ID>
+              <Description>"+3"</Description>
+              <LastState Value="042415D1" RealAddress="1404C6583"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+4C6580+3</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>16</ID>
+              <Description>"Full"</Description>
+              <LastState Value="4EA7D340" RealAddress="144707B58"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+4C6580+042415d1+7</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>35</ID>
+              <Description>"Ptrs"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>36</ID>
+                  <Description>"No Collision"</Description>
+                  <LastState Value="1" RealAddress="7FF44F03DA60"/>
+                  <VariableType>Binary</VariableType>
+                  <BitStart>0</BitStart>
+                  <BitLength>1</BitLength>
+                  <ShowAsBinary>0</ShowAsBinary>
+                  <Address>DarkSoulsIII.exe+4C6580+042415d1+7</Address>
+                  <Offsets>
+                    <Offset>48</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"BaseF"</Description>
+          <LastState Value="48 8B 05 34 4A 23 04 41 0F B6" RealAddress="1404CA44D"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>10</ByteLength>
+          <Address>DarkSoulsIII.exe+4CA44D</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17</ID>
+              <Description>"+3"</Description>
+              <LastState Value="04234A34" RealAddress="1404CA450"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+4CA44D+3</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>18</ID>
+              <Description>"Full"</Description>
+              <LastState Value="3E84DFB0" RealAddress="1446FEE88"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+4CA44D+4234a34+7</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>37</ID>
+              <Description>"Ptrs"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>39</ID>
+                  <Description>"Event Draw"</Description>
+                  <LastState Value="0" RealAddress="7FF43E84E058"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>DarkSoulsIII.exe+4CA44D+4234a34+7</Address>
+                  <Offsets>
+                    <Offset>A8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>40</ID>
+                  <Description>"Event Disable"</Description>
+                  <LastState Value="0" RealAddress="7FF43E84E084"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>DarkSoulsIII.exe+4CA44D+4234a34+7</Address>
+                  <Offsets>
+                    <Offset>D4</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Debug"</Description>
+          <LastState Value="4C 8D 05 4A C9 E5 03 48 8D 15 E2 F3 F4 01 48 8B CB E8 72 0A A3 01 48 83 3D 62 C9 E5 03 00" RealAddress="1408D06F8"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>30</ByteLength>
+          <Address>DarkSoulsIII.exe+8D06F8</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>19</ID>
+              <Description>"+3"</Description>
+              <LastState Value="03E5C909" RealAddress="1408D073D"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+8D073A+3</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"Full"</Description>
+              <LastState Value="0" RealAddress="14472D04A"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+8D073A+3e5c909+7</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>38</ID>
+              <Description>"Ptrs"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>41</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="1" RealAddress="14472D056"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>DarkSoulsIII.exe+8D073A+3e5c909+7+9+3</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Speed"</Description>
+          <LastState Value="88 00 00 00 00 00 80 3F C7 86 A0 00 00 00 00 00 80 BF 33" RealAddress="141096F2C"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>19</ByteLength>
+          <Address>DarkSoulsIII.exe+1096F2C</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>21</ID>
+              <Description>"+4"</Description>
+              <LastState Value="3F800000" RealAddress="141096F30"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+1096F2C+4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>28</ID>
+              <Description>"Speed"</Description>
+              <LastState Value="1" RealAddress="141096F30"/>
+              <VariableType>Float</VariableType>
+              <Address>DarkSoulsIII.exe+1096F2C+4</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"GameRend"</Description>
+          <LastState Value="80 3D 56 2E EF 03 00 48 8B 15 DF 58 FC 03 0F 10 02 0F 29" RealAddress="1406287AB"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>19</ByteLength>
+          <Address>DarkSoulsIII.exe+6287AB</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>22</ID>
+              <Description>"+2"</Description>
+              <LastState Value="03EF2E56" RealAddress="1406287AD"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>DarkSoulsIII.exe+6287AB+2</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"Full"</Description>
+              <LastState Value="01" RealAddress="14451B608"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Byte</VariableType>
+              <Address>DarkSoulsIII.exe+6287AB+3ef2e56+7</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>24</ID>
+              <Description>"Ptrs"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>25</ID>
+                  <Description>"Hide map"</Description>
+                  <LastState Value="1" RealAddress="14451B608"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>DarkSoulsIII.exe+6287AB+3ef2e56+7</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>27</ID>
+                  <Description>"Hide obj"</Description>
+                  <LastState Value="1" RealAddress="14451B609"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>DarkSoulsIII.exe+6287AB+3ef2e56+7+1</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26</ID>
+                  <Description>"Hide char"</Description>
+                  <LastState Value="1" RealAddress="14451B60A"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>DarkSoulsIII.exe+6287AB+3ef2e56+9</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
