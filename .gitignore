@@ -1,12 +1,11 @@
 legacy/
 
-
 # Created by https://www.gitignore.io/api/qt,python,qtcreator
 # Edit at https://www.gitignore.io/?templates=qt,python,qtcreator
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+__pycache__
 *.py[cod]
 *$py.class
 

@@ -80,6 +80,10 @@ def strip ():
   print('Stripping with UPX...')
   run(r'upx-3.95-win64\upx -9 release\DarkSoulsIII-PracticeTool.exe')
 
+def debug():
+  print('Building with Jom...')
+  run(f'jom -j{multiprocessing.cpu_count()} -f Makefile.Debug')
+
 def run_program():
   print('Running...')
   run(r'release\DarkSoulsIII-PracticeTool.exe')
@@ -92,11 +96,11 @@ if __name__ == '__main__':
   if '-h' in sys.argv or '--help' in sys.argv or 'help' in sys.argv:
     print(HELP)
     exit()
-  elif 'build' in sys.argv or len(sys.argv) == 1:
+  if 'build' in sys.argv or len(sys.argv) == 1:
     build()
-  elif 'strip' in sys.argv:
+  if 'strip' in sys.argv:
     strip()
-  elif 'run' in sys.argv:
+  if 'debug' in sys.argv:
+    debug()
+  if 'run' in sys.argv:
     run_program()
-  else:
-    print(HELP)

@@ -100,3 +100,9 @@ The compiled program will be found in `build\release`.
 - [Reverse Souls](https://github.com/igromanru/Dark-Souls-III-Cheat-Engine-Guide) for the CE table upon which some of the trainers and tools are based
 - [retifrav](https://retifrav.github.io/blog/2018/02/17/build-qt-statically/) for the post about statically building Qt
 - Pav for the invaluable help in figuring out the instant quitout static addresses
+
+### Libraries
+
+- [Qt](https://www.qt.io/)
+- [skystrife/cpptoml](https://github.com/skystrife/cpptoml)
+- [c42f/tinyformat](https://github.com/c42f/tinyformat)

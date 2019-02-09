@@ -1,17 +1,33 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#pragma once
 
-#include <QWidget>
-#include <QGridLayout>
-#include "flag.h"
+#include <QPushButton>
+#include <QMessageBox>
+#include <QTextEdit>
+#include <thread>
+#include "widgets.h"
+#include "memory.h"
 
-class QPushButton;
-class Window : public QWidget {
-  public:
-    explicit Window(QWidget *parent = 0);
-  private:
-    QGridLayout layout;
-    std::vector<DS3PracticeTools::Flag*> flags;
-};
+namespace DS3PracticeTools {
+  class Window : public QWidget {
+    public:
+      explicit Window(QWidget *parent = 0);
+      void keyup(DWORD vk_code);
+      void instaqo();
+    private:
 
-#endif // WINDOW_H
+      Process p;
+      Speed* speed;
+      Position* position;
+      std::vector<Flag*> flags;
+
+      QTextEdit* te;
+      QPushButton* attach_btn;
+      QPushButton* instant_quitout_btn;
+      QGridLayout layout;
+
+      std::thread position_updater;
+      HHOOK hook;
+
+      std::vector<std::pair<DWORD, std::function<void(void)>>> hotkey_bindings;
+  };
+}
