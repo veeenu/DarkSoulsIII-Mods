@@ -1,5 +1,11 @@
 # Dark Souls III Mods
 
+**Disclaimer**: this repository is deprecated and archived. It is recommended that you use the new version of the Practice Tool, which is lightweight, portable across patches and with an in-game UI.
+
+You can find it here: https://github.com/veeenu/darksoulsiii-practice-tool
+
+-----
+
 Here you can find some utilities intended to aid in practicing Dark Souls III speedrunning in the least dreadful way possible.
 
 This repository contains the source code for all the tools. 

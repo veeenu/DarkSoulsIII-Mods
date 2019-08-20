@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <iostream>
 #include <fstream>
+#include <Shlwapi.h>
 #include "window.h"
 #include "common.h"
 
@@ -32,34 +33,35 @@ const char* default_settings =
   "attach = \"VK_F10\"\n"
   ;
 
-BOOL FileExists(std::string path) {
+/*BOOL FileExists(std::string path) {
   DWORD dwAttrib = GetFileAttributes(std::wstring(path.begin(), path.end()).c_str());
 
   return (dwAttrib != INVALID_FILE_ATTRIBUTES && 
          !(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
-}
+}*/
 
 std::string get_config_file_name () {
-  TCHAR szExeFileName[MAX_PATH]; 
-  GetModuleFileName(NULL, szExeFileName, MAX_PATH);
-  std::wstring wf(szExeFileName);
+  char szExeFileName[MAX_PATH]; 
+  GetModuleFileNameA(NULL, szExeFileName, MAX_PATH);
+  std::string wf(szExeFileName);
   uint64_t lastslash = wf.find_last_of('\\');
-  std::wstring dirname(wf.begin(), wf.begin() + lastslash + 1),
-              conf_name(dirname + std::wstring(L"DarkSoulsIII-PracticeTool.toml"));
-  return std::string(conf_name.begin(), conf_name.end());
+  std::string dirname(wf.begin(), wf.begin() + lastslash + 1);
+  return dirname + std::string("DarkSoulsIII-PracticeTool.toml");
 }
 
 int main(int argc, char **argv) {
   QApplication app (argc, argv);
 
   std::string conf_name = get_config_file_name();
-  if (!FileExists(conf_name)) {
+  // if (!FileExists(conf_name)) {
+  if (!PathFileExistsA(conf_name.c_str())) {
     FILE* fp = fopen(conf_name.c_str(), "w");
     fprintf(fp, "%s\n", default_settings);
     fclose(fp);
   }
 
   window = new DS3PracticeTools::Window();
+  window->show();
 
   auto hook = SetWindowsHookEx(WH_KEYBOARD_LL, [](int nCode, WPARAM wParam, LPARAM lParam)->LRESULT {
     if (nCode == HC_ACTION) {
@@ -70,9 +72,6 @@ int main(int argc, char **argv) {
           break;
         case WM_KEYUP:
           window->keyup(PKBDLLHOOKSTRUCT(lParam)->vkCode);
-          /*auto vk_code = PKBDLLHOOKSTRUCT(lParam)->vkCode;
-          if (vk_code == VK_F7)
-            window->instaqo();*/
           break;
       }
     }
@@ -82,8 +81,6 @@ int main(int argc, char **argv) {
   QObject::connect(window, &QWidget::destroyed, [&hook] () {
     UnhookWindowsHookEx(hook);
   });
-
-  window->show();
 
   return app.exec();
 }

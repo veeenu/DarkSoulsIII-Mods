@@ -31,6 +31,7 @@ namespace DS3PracticeTools {
       { "Hide Objects",           &Process::set_hide_objects }
     }; 
 
+    printf("build flags\n");
     for (int i = 0; i < labels.size(); i++) {
       int col = i % 2, row = i / 2;
       flags.push_back(new Flag(this, labels[i].first));
@@ -56,6 +57,7 @@ namespace DS3PracticeTools {
       });
     }
 
+    printf("build position\n");
     position = new Position(this);
     position->setGeometry(200, 7*24, 200, 48);
 
@@ -80,6 +82,7 @@ namespace DS3PracticeTools {
       te->append(tfm::format("Position saved %.2f %.2f %.2f", x, y, z).c_str());
     });
 
+    printf("build speed\n");
     speed = new Speed(this);
     speed->setGeometry(0, 7*24, 200, 48);
 
@@ -93,6 +96,7 @@ namespace DS3PracticeTools {
         }
     });
 
+    printf("build attach & insta\n");
     attach_btn = new QPushButton("Open process", this);
     attach_btn->setGeometry(0, 9*24, 200, 48);
 
@@ -114,6 +118,7 @@ namespace DS3PracticeTools {
       p.instant_quitout();
     });
 
+    printf("build pos thread\n");
     position_updater = std::thread([this] () {
       while (true) {
         if (!position->get_lock() && p.is_attached()) {
@@ -130,6 +135,7 @@ namespace DS3PracticeTools {
       }
     });
 
+    printf("build hotkeys\n");
     // At least move this to a different function
 
     std::unordered_map<std::string, DWORD> hotkey_string_mappings({
